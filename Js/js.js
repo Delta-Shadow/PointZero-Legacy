@@ -15,9 +15,13 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 var Game = new GameManager();
+var ball = new Ball();
+var spikes = new Spikes();
 
 window.addEventListener("resize", OnResizeCalled, false);
-window.addEventListener("orientationchange", OnResizeCalled, false);  
+window.addEventListener("orientationchange", OnResizeCalled, false);
+document.addEventListener("mousedown", clickStart, false); 
+document.addEventListener("mouseup", clickEnd, false); 
 
 function OnResizeCalled() { 
     div.style.width = window.innerWidth + 'px'; 
@@ -41,7 +45,57 @@ function OnResizeCalled() {
 	} 
 }
 
+function clickStart(e) {
+	Game.startClick.x = e.clientX;
+	Game.startClick.y = e.clientY;
+};
+
+function clickEnd(e) {
+	Game.endClick.x = e.clientX;
+	Game.endClick.y = e.clientY;
+	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
+	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
+
+	if (Game.dragDistance.x > Game.dragDistance.y) {
+		// Drag is in X Plane
+		ball.g.y = 0;
+		ball.v.x *= 0.3;
+		if (Game.endClick.x > Game.startClick.x) { // Dragged Right
+			ball.g.x = 0.1;
+		} else if (Game.endClick.x < Game.startClick.x) { // Dragged Left
+			ball.g.x = -0.1;
+		}
+	} else if (Game.dragDistance.y > Game.dragDistance.x) {
+		// Drag is in Y Plane
+		ball.g.x = 0;
+		ball.v.y *= 0.3;
+		if (Game.endClick.y > Game.startClick.y) { // Dragged Down
+			ball.g.y = 0.1;
+		} else if (Game.endClick.y < Game.startClick.y) { // Dragged Up
+			ball.g.y = -0.1;
+		}
+	}
+};
+
 OnResizeCalled();
 
-ctx.fillStyle = Game.bg;
-ctx.fillRect(0, 0, Game.width, Game.height);
+function menu() {
+	Game.roller = requestAnimFrame(menu);
+	ctx.clearRect(0, 0, Game.width, Game.height);
+
+	ctx.fillStyle = Game.bg;
+	ctx.fillRect(0, 0, Game.width, Game.height);
+};
+
+function main() {
+	Game.roller = requestAnimFrame(main);
+	ctx.clearRect(0, 0, Game.width, Game.height);
+
+	ctx.fillStyle = Game.bg;
+	ctx.fillRect(0, 0, Game.width, Game.height);
+
+	spikes.run();
+	ball.run();
+};
+
+main();

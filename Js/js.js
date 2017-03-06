@@ -52,7 +52,7 @@ function clickStart(e) {
 	Game.startClick.x = e.clientX;
 	Game.startClick.y = e.clientY;
 };
-
+	
 function clickEnd(e) {
 	e.preventDefault();
 	Game.endClick.x = e.clientX;

@@ -22,11 +22,8 @@ window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
 document.addEventListener("mousedown", clickStart, false); 
 document.addEventListener("mouseup", clickEnd, false); 
-//document.addEventListener("touchstart", touchBegin, false); 
-document.addEventListener("touchend", touchStop, false); 
-document.body.addEventListener('touchstart', function(e) {
-	alert(e.changedTouches[0].clientX) // alert pageX coordinate of touch point
-}, false); 
+document.addEventListener("touchstart", touchBegin, false); 
+document.addEventListener("touchend", touchStop, false);
 
 function OnResizeCalled() { 
     div.style.width = window.innerWidth + 'px'; 
@@ -73,8 +70,8 @@ function touchBegin(e) {
 	
 function touchStop(e) {
 	e.preventDefault();
-	Game.endClick.x = e.changedTouches[0].x;
-	Game.endClick.y = e.changedTouches[0].y;
+	Game.endClick.x = e.changedTouches[0].clientX;
+	Game.endClick.y = e.changedTouches[0].clientX;
 	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
 	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
 	Game.evaluateDrag();

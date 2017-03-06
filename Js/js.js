@@ -48,11 +48,13 @@ function OnResizeCalled() {
 }
 
 function clickStart(e) {
+	e.preventDefault();
 	Game.startClick.x = e.clientX;
 	Game.startClick.y = e.clientY;
 };
 
 function clickEnd(e) {
+	e.preventDefault();
 	Game.endClick.x = e.clientX;
 	Game.endClick.y = e.clientY;
 	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);

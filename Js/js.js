@@ -22,8 +22,11 @@ window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
 document.addEventListener("mousedown", clickStart, false); 
 document.addEventListener("mouseup", clickEnd, false); 
-document.addEventListener("touchstart", touchBegin, false); 
+//document.addEventListener("touchstart", touchBegin, false); 
 document.addEventListener("touchend", touchStop, false); 
+document.body.addEventListener('touchstart', function(e) {
+	alert(e.changedTouches[0].pageX) // alert pageX coordinate of touch point
+}, false); 
 
 function OnResizeCalled() { 
     div.style.width = window.innerWidth + 'px'; 

@@ -25,7 +25,7 @@ document.addEventListener("mouseup", clickEnd, false);
 //document.addEventListener("touchstart", touchBegin, false); 
 document.addEventListener("touchend", touchStop, false); 
 document.body.addEventListener('touchstart', function(e) {
-	alert(e.changedTouches[0].pageX) // alert pageX coordinate of touch point
+	alert(e.changedTouches[0].clientX) // alert pageX coordinate of touch point
 }, false); 
 
 function OnResizeCalled() { 

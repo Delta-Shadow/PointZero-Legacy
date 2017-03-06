@@ -10,6 +10,8 @@
               };
     })();
 
+alert("New");
+
 var div = document.getElementById('div');
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");

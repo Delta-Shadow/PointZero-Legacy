@@ -2,13 +2,18 @@ function CandySystem() {
 	this.candies = [];
 };
 
-CandySystem.prototype.spawn = function(x, y) {
-	var o = new Candy(x, y);
+CandySystem.prototype.spawn = function() {
+	var o = new Candy(Math.floor(Math.random()*400) + 100, Math.floor(Math.random()*600) + 100);
 	this.candies.push(o);
 };
 
 CandySystem.prototype.run = function() {
 	for (var i in this.candies) {
+		if (this.candies[i].isCollidingWithBall(ball.x, ball.y, ball.radius*2, ball.radius*2)) {
+			delete this.candies[i];
+			candySystem.spawn();
+			break;
+		}
 		this.candies[i].update();
 		this.candies[i].draw();
 	};
@@ -17,9 +22,15 @@ CandySystem.prototype.run = function() {
 function Candy(x, y) {
 	this.x = x;
 	this.y = y;
-	this.width = 15;
-	this.height = 15;
+	this.width = 25;
+	this.height = 25;
 	this.color = "#4ad072";
+};
+
+Candy.prototype.isCollidingWithBall = function(x, y, width, height) {
+	if (x < this.x+this.width && x+width > x && y < this.y + this.height && this.height + this.y > y) {
+		return true;
+	};		  
 };
 
 Candy.prototype.update = function() {

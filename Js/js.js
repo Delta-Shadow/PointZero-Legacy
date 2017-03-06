@@ -101,5 +101,5 @@ function main() {
 	candySystem.run();
 };
 
-candySystem.spawn(Math.floor(Math.random()*400) + 100, Math.floor(Math.random()*600) + 100);
+candySystem.spawn();
 main();

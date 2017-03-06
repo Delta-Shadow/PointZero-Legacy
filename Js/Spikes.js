@@ -1,5 +1,5 @@
 function Spikes() {
-	this.color = "#4ad072";
+	this.color = "rgb(80, 70, 60)";
 	this.height = 50;
 	this.width = 25;
 };

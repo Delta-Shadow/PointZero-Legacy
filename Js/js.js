@@ -17,6 +17,7 @@ var ctx = canvas.getContext("2d");
 var Game = new GameManager();
 var ball = new Ball();
 var spikes = new Spikes();
+var candySystem = new CandySystem();
 
 window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
@@ -71,7 +72,7 @@ function touchBegin(e) {
 function touchStop(e) {
 	e.preventDefault();
 	Game.endClick.x = e.changedTouches[0].clientX;
-	Game.endClick.y = e.changedTouches[0].clientX;
+	Game.endClick.y = e.changedTouches[0].clientY;
 	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
 	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
 	Game.evaluateDrag();
@@ -90,12 +91,15 @@ function menu() {
 function main() {
 	Game.roller = requestAnimFrame(main);
 	ctx.clearRect(0, 0, Game.width, Game.height);
+	Game.ticker++;
 
 	ctx.fillStyle = Game.bg;
 	ctx.fillRect(0, 0, Game.width, Game.height);
 
 	spikes.run();
 	ball.run();
+	candySystem.run();
 };
 
+candySystem.spawn(Math.floor(Math.random()*400) + 100, Math.floor(Math.random()*600) + 100);
 main();

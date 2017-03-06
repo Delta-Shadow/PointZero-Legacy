@@ -10,8 +10,6 @@
               };
     })();
 
-alert("New");
-
 var div = document.getElementById('div');
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -24,8 +22,8 @@ window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
 document.addEventListener("mousedown", clickStart, false); 
 document.addEventListener("mouseup", clickEnd, false); 
-document.addEventListener("touchstart", clickStart, false); 
-document.addEventListener("touchend", clickEnd, false); 
+document.addEventListener("touchstart", touchBegin, false); 
+document.addEventListener("touchend", touchStop, false); 
 
 function OnResizeCalled() { 
     div.style.width = window.innerWidth + 'px'; 
@@ -59,6 +57,21 @@ function clickEnd(e) {
 	e.preventDefault();
 	Game.endClick.x = e.clientX;
 	Game.endClick.y = e.clientY;
+	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
+	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
+	Game.evaluateDrag();
+};
+
+function touchBegin(e) {
+	e.preventDefault();
+	Game.startClick.x = e.changedTouches[0].clientX;
+	Game.startClick.y = e.changedTouches[0].clientY;
+};
+	
+function touchStop(e) {
+	e.preventDefault();
+	Game.endClick.x = e.changedTouches[0].x;
+	Game.endClick.y = e.changedTouches[0].y;
 	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
 	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
 	Game.evaluateDrag();

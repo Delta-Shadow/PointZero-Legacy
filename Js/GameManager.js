@@ -3,11 +3,14 @@ function GameManager() {
 	this.height = 800;
 	this.roller;
 	this.ticker = 0;
-	this.bg = "#a9e4e5";
+	this.bg = "White";
+	this.mode = 1;
 
 	this.startClick = {};
 	this.endClick = {};
 	this.dragDistance = {};
+
+	this.score = 0;
 };
 
 GameManager.prototype.evaluateDrag = function() {
@@ -29,5 +32,17 @@ GameManager.prototype.evaluateDrag = function() {
 		} else if (this.endClick.y < this.startClick.y) { // Dragged Up
 			ball.g.y = -0.1;
 		}
+	}
+};
+
+GameManager.prototype.drawScore = function() {
+	ctx.fillStyle = "#81f495";
+	ctx.fillRect(220, 320, 160, 160);
+	ctx.font = "100px Arial";
+	ctx.fillStyle = "White";
+	if (this.score < 10) {
+		ctx.fillText("0" + this.score, 245, 440);	
+	} else {
+		ctx.fillText("" + this.score, 245, 440);
 	}
 }

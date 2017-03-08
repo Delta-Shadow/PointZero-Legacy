@@ -18,6 +18,7 @@ var Game = new GameManager();
 var ball = new Ball();
 var spikes = new Spikes();
 var candySystem = new CandySystem();
+var particleSystem = new ParticleSystem();
 
 window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
@@ -96,9 +97,12 @@ function main() {
 	ctx.fillStyle = Game.bg;
 	ctx.fillRect(0, 0, Game.width, Game.height);
 
+	Game.drawScore();
+
 	spikes.run();
-	ball.run();
 	candySystem.run();
+	particleSystem.run();
+	ball.run();
 };
 
 candySystem.spawn();

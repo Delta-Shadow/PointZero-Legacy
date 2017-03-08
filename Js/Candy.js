@@ -12,6 +12,7 @@ CandySystem.prototype.run = function() {
 		if (this.candies[i].isCollidingWithBall(ball.x, ball.y, ball.radius*2, ball.radius*2)) {
 			delete this.candies[i];
 			candySystem.spawn();
+			Game.score++;
 			break;
 		}
 		this.candies[i].update();
@@ -24,7 +25,7 @@ function Candy(x, y) {
 	this.y = y;
 	this.width = 25;
 	this.height = 25;
-	this.color = "#4ad072";
+	this.color = "#f21b3f";
 };
 
 Candy.prototype.isCollidingWithBall = function(x, y, width, height) {

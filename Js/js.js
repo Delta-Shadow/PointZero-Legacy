@@ -75,17 +75,25 @@ function clickEnd(e) {
 
 function touchBegin(e) {
 	e.preventDefault();
-	Game.startClick.x = e.changedTouches[0].clientX;
-	Game.startClick.y = e.changedTouches[0].clientY;
+	if (Game.mode == 0) {
+		Game.switchToGame();
+	} else if (Game.mode == 1) {
+		Game.startClick.x = e.changedTouches[0].clientX;
+		Game.startClick.y = e.changedTouches[0].clientY;
+	} else if (Game.mode == 2) {
+		Game.restart();
+	}
 };
 	
 function touchStop(e) {
 	e.preventDefault();
-	Game.endClick.x = e.changedTouches[0].clientX;
-	Game.endClick.y = e.changedTouches[0].clientY;
-	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
-	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
-	Game.evaluateDrag();
+	if (Game.mode == 1) {
+		Game.endClick.x = e.changedTouches[0].clientX;
+		Game.endClick.y = e.changedTouches[0].clientY;
+		Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
+		Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
+		Game.evaluateDrag();
+	};
 };
 
 OnResizeCalled();

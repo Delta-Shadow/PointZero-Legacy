@@ -1,7 +1,23 @@
 function Spikes() {
 	this.color = "rgb(80, 70, 60)";
-	this.height = 50;
+	this.height = -10;
 	this.width = 25;
+};
+
+Spikes.prototype.isReady = function() {
+	if (this.height >= 50) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+Spikes.prototype.enter = function() {
+	this.height += 1;
+};
+
+Spikes.prototype.exit = function() {
+	this.height -= 1;
 };
 
 Spikes.prototype.update = function() {

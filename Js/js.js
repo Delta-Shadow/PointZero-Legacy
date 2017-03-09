@@ -15,6 +15,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 var Game = new GameManager();
+var Menu = new MenuManager();
 var ball = new Ball();
 var spikes = new Spikes();
 var candySystem = new CandySystem();
@@ -51,17 +52,25 @@ function OnResizeCalled() {
 
 function clickStart(e) {
 	e.preventDefault();
-	Game.startClick.x = e.clientX;
-	Game.startClick.y = e.clientY;
+	if (Game.mode == 0) {
+		Game.switchToGame();
+	} else if (Game.mode == 1) {
+		Game.startClick.x = e.clientX;
+		Game.startClick.y = e.clientY;
+	} else if (Game.mode == 2) {
+		Game.restart();
+	}
 };
 	
 function clickEnd(e) {
 	e.preventDefault();
-	Game.endClick.x = e.clientX;
-	Game.endClick.y = e.clientY;
-	Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
-	Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
-	Game.evaluateDrag();
+	if (Game.mode == 1) {
+		Game.endClick.x = e.clientX;
+		Game.endClick.y = e.clientY;
+		Game.dragDistance.x = Math.abs(Game.startClick.x - Game.endClick.x);
+		Game.dragDistance.y = Math.abs(Game.startClick.y - Game.endClick.y);
+		Game.evaluateDrag();
+	};
 };
 
 function touchBegin(e) {
@@ -87,6 +96,9 @@ function menu() {
 
 	ctx.fillStyle = Game.bg;
 	ctx.fillRect(0, 0, Game.width, Game.height);
+
+	spikes.run();
+	Menu.run();
 };
 
 function main() {
@@ -106,4 +118,4 @@ function main() {
 };
 
 candySystem.spawn();
-main();
+menu();

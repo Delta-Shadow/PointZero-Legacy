@@ -4,7 +4,7 @@ function GameManager() {
 	this.roller;
 	this.ticker = 0;
 	this.bg = "White";
-	this.mode = 1;
+	this.mode = 0;
 
 	this.startClick = {};
 	this.endClick = {};
@@ -45,4 +45,15 @@ GameManager.prototype.drawScore = function() {
 	} else {
 		ctx.fillText("" + this.score, 245, 440);
 	}
-}
+};
+
+GameManager.prototype.switchToGame = function() {
+	window.cancelAnimationFrame(this.roller);
+	this.ticker = 0;
+	this.mode = 1;
+	main();
+};
+
+GameManager.prototype.restart = function() {
+	window.location.reload(false);
+};

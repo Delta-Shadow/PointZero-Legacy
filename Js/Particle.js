@@ -24,13 +24,13 @@ ParticleSystem.prototype.run = function() {
 function Particle(mode, x, y, v, g) {
 	this.x = x;
 	this.y = y;
-	this.width = 10;
-	this.height = 10;
+	this.width = 12;
+	this.height = 12;
 	this.v = {x: v.x, y: v.y};
 	this.color = "#7a306c";
 	this.g = {x: g.x, y: g.y};
 	this.mode = mode;
-	this.timeOut = 50;
+	this.timeOut = 30;
 	this.timer = 0;
 };
 

@@ -27,7 +27,7 @@ Ball.prototype.update = function() {
 	this.x += this.v.x;
 	this.y += this.v.y;
 	if (Game.ticker % 10 == 0) {
-		particleSystem.spawn("Normal", this.x, this.y, {x: this.v.x, y: this.v.y}, {x: 0, y: 0});
+		particleSystem.spawn("Normal", this.x, this.y, {x: -this.v.x, y: -this.v.y}, {x: 0, y: 0});
 	};
 };
 

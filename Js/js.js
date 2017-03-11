@@ -119,6 +119,10 @@ function main() {
 	ctx.fillStyle = Game.bg;
 	ctx.fillRect(0, 0, Game.width, Game.height);
 
+	if (Game.ticker < 500) {
+		if (Game.ticker > 100) {Menu.swipe.y -= 10};
+		Menu.swipe.draw();
+	};
 	Game.drawScore();
 
 	spikes.run();

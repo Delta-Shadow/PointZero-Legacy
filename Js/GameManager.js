@@ -11,6 +11,8 @@ function GameManager() {
 	this.dragDistance = {};
 
 	this.score = 0;
+
+	this.swipe = new Swipe();
 };
 
 GameManager.prototype.evaluateDrag = function() {

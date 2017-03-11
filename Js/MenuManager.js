@@ -1,16 +1,18 @@
 function MenuManager() {
 	this.title = new Title();
 	this.subtitle = new Subtitle();
+	this.swipe = new Swipe();
 	this.allReady = false;
 };
 
 MenuManager.prototype.run = function() {
 	if (Game.mode == 1) {
-		if (this.title.isOutOfScreen() && this.subtitle.isOutOfScreen()) {
+		if (this.title.isOutOfScreen() && this.subtitle.isOutOfScreen() && this.swipe.isReady()) {
 			Game.switchToGame();
 		} else {
 			this.title.exit();
 			this.subtitle.exit();
+			this.swipe.enter();
 		};
 
 	} else if (Game.mode == 0) {
@@ -30,6 +32,54 @@ MenuManager.prototype.run = function() {
 
 	this.title.draw();
 	this.subtitle.draw();
+	this.swipe.draw();
+};
+
+
+
+
+
+
+function Swipe() {
+	this.sprite = new Image();
+	this.x = 230;
+	this.y = -150;
+	this.width = 150;
+	this.height = 150;
+	this.speed = 5;
+	this.init();
+};
+
+Swipe.prototype.isReady = function() {
+	if (this.y >= 120) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+Swipe.prototype.isOutOfScreen = function() {
+	if (this.y <= -180) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+Swipe.prototype.enter = function() {
+	this.y += this.speed;
+};
+
+Swipe.prototype.exit = function() {
+	this.y -= this.speed;
+};
+
+Swipe.prototype.init = function() {
+	this.sprite.src = "Data/Swipe.png";
+};
+
+Swipe.prototype.draw = function() {
+	ctx.drawImage(this.sprite, this.x, this.y, this.width, this.height);
 };
 
 
@@ -67,7 +117,7 @@ Title.prototype.enter = function() {
 };
 
 Title.prototype.exit = function() {
-	this.opacity -= 0.02;
+	this.opacity -= 0.05;
 	this.color = "rgba(0, 0, 0, " + this.opacity + ")";
 };
 
@@ -120,7 +170,7 @@ Subtitle.prototype.enter = function() {
 };
 
 Subtitle.prototype.exit = function() {
-	this.opacity -= 0.02;
+	this.opacity -= 0.05;
 	this.color = "rgba(0, 0, 0, " + this.opacity + ")";
 };
 

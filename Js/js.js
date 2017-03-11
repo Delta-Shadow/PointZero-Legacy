@@ -20,6 +20,7 @@ var ball = new Ball();
 var spikes = new Spikes();
 var candySystem = new CandySystem();
 var particleSystem = new ParticleSystem();
+var explosionSystem = new ExplosionSystem();
 
 window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
@@ -53,7 +54,7 @@ function OnResizeCalled() {
 function clickStart(e) {
 	e.preventDefault();
 	if (Game.mode == 0) {
-		Game.switchToGame();
+		Game.mode = 1;
 	} else if (Game.mode == 1) {
 		Game.startClick.x = e.clientX;
 		Game.startClick.y = e.clientY;
@@ -76,7 +77,7 @@ function clickEnd(e) {
 function touchBegin(e) {
 	e.preventDefault();
 	if (Game.mode == 0) {
-		Game.switchToGame();
+		Game.mode = 1;
 	} else if (Game.mode == 1) {
 		Game.startClick.x = e.changedTouches[0].clientX;
 		Game.startClick.y = e.changedTouches[0].clientY;
@@ -104,6 +105,7 @@ function menu() {
 
 	ctx.fillStyle = Game.bg;
 	ctx.fillRect(0, 0, Game.width, Game.height);
+	Game.drawScore();
 
 	spikes.run();
 	Menu.run();
@@ -122,6 +124,7 @@ function main() {
 	spikes.run();
 	candySystem.run();
 	particleSystem.run();
+	explosionSystem.run();
 	ball.run();
 };
 

@@ -50,7 +50,6 @@ GameManager.prototype.drawScore = function() {
 GameManager.prototype.switchToGame = function() {
 	window.cancelAnimationFrame(this.roller);
 	this.ticker = 0;
-	this.mode = 1;
 	main();
 };
 

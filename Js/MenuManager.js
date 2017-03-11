@@ -5,17 +5,27 @@ function MenuManager() {
 };
 
 MenuManager.prototype.run = function() {
-	if (this.title.isReady() && this.subtitle.isReady() && spikes.isReady()) {
-		this.allReady = true;
-	} else if (this.allReady == false) {
-		this.title.enter();
-		this.subtitle.enter();
-		spikes.enter();
-	};
+	if (Game.mode == 1) {
+		if (this.title.isOutOfScreen() && this.subtitle.isOutOfScreen()) {
+			Game.switchToGame();
+		} else {
+			this.title.exit();
+			this.subtitle.exit();
+		};
 
-	if (this.allReady) {
-		this.title.update();
-		this.subtitle.update();
+	} else if (Game.mode == 0) {
+		if (this.title.isReady() && this.subtitle.isReady() && spikes.isReady()) {
+			this.allReady = true;
+		} else if (this.allReady == false) {
+			this.title.enter();
+			this.subtitle.enter();
+			spikes.enter();
+		};
+
+		if (this.allReady && Game.mode == 0) {
+			this.title.update();
+			this.subtitle.update();
+		};
 	};
 
 	this.title.draw();
@@ -27,7 +37,7 @@ MenuManager.prototype.run = function() {
 
 function Title() {
 	this.x = 100;
-	this.y = 300;
+	this.y = 265;
 	this.width = 500;
 	this.height = 200;
 	this.font = "90px Arial";
@@ -37,6 +47,14 @@ function Title() {
 
 Title.prototype.isReady = function() {
 	if (this.opacity >= 1) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+Title.prototype.isOutOfScreen = function() {
+	if (this.opacity <= 0) {
 		return true;
 	} else {
 		return false;
@@ -66,9 +84,12 @@ Title.prototype.draw = function() {
 
 
 
+
+
+
 function Subtitle() {
 	this.x = 220;
-	this.y = 380;
+	this.y = 680;
 	this.width = 500;
 	this.height = 200;
 	this.font = "30px Arial";
@@ -79,6 +100,14 @@ function Subtitle() {
 
 Subtitle.prototype.isReady = function() {
 	if (this.opacity >= 1) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
+Subtitle.prototype.isOutOfScreen = function() {
+	if (this.opacity <= 0) {
 		return true;
 	} else {
 		return false;

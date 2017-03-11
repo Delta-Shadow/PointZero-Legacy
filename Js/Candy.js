@@ -3,13 +3,17 @@ function CandySystem() {
 };
 
 CandySystem.prototype.spawn = function() {
-	var o = new Candy(Math.floor(Math.random()*400) + 100, Math.floor(Math.random()*600) + 100);
+	var x = Math.floor(Math.random()*400) + 100;
+	var y = Math.floor(Math.random()*600) + 100;
+	var o = new Candy(x, y);
 	this.candies.push(o);
+	explosionSystem.spawn("reverse", x, y);
 };
 
 CandySystem.prototype.run = function() {
 	for (var i in this.candies) {
 		if (this.candies[i].isCollidingWithBall(ball.x, ball.y, ball.radius*2, ball.radius*2)) {
+			explosionSystem.spawn("linear", this.candies[i].x, this.candies[i].y);
 			delete this.candies[i];
 			candySystem.spawn();
 			Game.score++;

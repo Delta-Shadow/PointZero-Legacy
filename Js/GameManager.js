@@ -13,6 +13,8 @@ function GameManager() {
 	this.score = 0;
 
 	this.swipe = new Swipe();
+
+	this.music = new Music();
 };
 
 GameManager.prototype.evaluateDrag = function() {
@@ -57,4 +59,12 @@ GameManager.prototype.switchToGame = function() {
 
 GameManager.prototype.restart = function() {
 	window.location.reload(false);
+};
+
+function Music() {
+	this.bg = new Howl({
+		urls: ["Data/Ex_Boxer.mp3"],
+		autoplay: true,
+		loop: true
+	})
 };

@@ -16,6 +16,7 @@ var ctx = canvas.getContext("2d");
 
 var Game = new GameManager();
 var Menu = new MenuManager();
+var gameOverScreen = new GameOverScreen();
 var ball = new Ball();
 var spikes = new Spikes();
 var candySystem = new CandySystem();
@@ -130,6 +131,10 @@ function main() {
 	particleSystem.run();
 	explosionSystem.run();
 	ball.run();
+
+	if (Game.mode == 2) {
+		gameOverScreen.run();
+	}
 };
 
 candySystem.spawn();

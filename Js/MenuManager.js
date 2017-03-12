@@ -93,6 +93,7 @@ function Title() {
 	this.font = "90px Arial";
 	this.color = "rgba(0, 0, 0, 1)";
 	this.opacity = 0;
+	this.direction = "None";
 };
 
 Title.prototype.isReady = function() {

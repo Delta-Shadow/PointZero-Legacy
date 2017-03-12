@@ -12,8 +12,7 @@ ParticleSystem.prototype.run = function() {
 		this.particles[i].run();
 		if (this.particles[i].mode == "Explosion" && this.particles[i].isOutOfScreen()) {
 			delete this.particles[i];
-		};
-		if (this.particles[i].mode == "Normal" && this.particles[i].timer >= this.particles[i].timeOut) {
+		} else if (this.particles[i].mode == "Normal" && this.particles[i].timer >= this.particles[i].timeOut) {
 			delete this.particles[i];
 		} else {
 			this.particles[i].timer++;

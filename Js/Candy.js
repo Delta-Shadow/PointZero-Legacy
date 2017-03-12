@@ -27,22 +27,27 @@ CandySystem.prototype.run = function() {
 function Candy(x, y) {
 	this.x = x;
 	this.y = y;
-	this.width = 25;
-	this.height = 25;
+	this.width = 0;
+	this.height = 0;
 	this.color = "#f21b3f";
 };
 
 Candy.prototype.isCollidingWithBall = function(x, y, width, height) {
-	if (x < this.x+this.width && x+width > x && y < this.y + this.height && this.height + this.y > y) {
+	if ( (this.x+this.width) >= x && this.x <= (x+width) && (this.y+this.height) >= y && this.y <= (y+height) ) {
 		return true;
-	};		  
+	} else {
+		return false;
+	}		  
 };
 
 Candy.prototype.update = function() {
-
+	if (this.width < 25 && this.height < 25) {
+		this.width++;
+		this.height++;
+	};
 };
 
 Candy.prototype.draw = function() {
 	ctx.fillStyle = this.color;
-	ctx.fillRect(this.x, this.y, this.width, this.height);
+	ctx.fillRect(this.x-(this.width/2), this.y-(this.height/2), this.width, this.height);
 };

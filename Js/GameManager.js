@@ -63,7 +63,7 @@ GameManager.prototype.restart = function() {
 
 function Music() {
 	this.bg = new Howl({
-		urls: ["Data/Ex_Boxer.mp3"],
+		urls: ["Data/Freddy_s_Menagerie.mp3"],
 		autoplay: true,
 		loop: true
 	})

@@ -18,6 +18,7 @@ Ball.prototype.checkCollisionWithSpikes = function() {
 Ball.prototype.update = function() {
 	if (this.checkCollisionWithSpikes()) {
 		Game.mode = 2;
+		Game.music.drop.play();
 		for (var i = 0; i <= 20; i++) {
 			particleSystem.spawn("Explosion", this.x, this.y, {x: Math.floor(Math.random()*5)-3, y: -(Math.floor(Math.random()*12)+4)}, {x: 0, y: 0.2});			
 		};

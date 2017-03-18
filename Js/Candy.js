@@ -17,6 +17,7 @@ CandySystem.prototype.run = function() {
 			delete this.candies[i];
 			candySystem.spawn();
 			Game.score++;
+			Game.music.drop.play();
 			break;
 		}
 		this.candies[i].update();

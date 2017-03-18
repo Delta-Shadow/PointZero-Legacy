@@ -54,7 +54,6 @@ GameManager.prototype.drawScore = function() {
 GameManager.prototype.switchToGame = function() {
 	window.cancelAnimationFrame(this.roller);
 	this.ticker = 0;
-	this.music.select.play();
 	main();
 };
 
@@ -68,7 +67,7 @@ function Music() {
 		autoplay: true,
 		loop: true
 	});
-	this.select = new Howl({
+	this.drop = new Howl({
 		urls: ["Data/Select.wav"],
 	})
 };

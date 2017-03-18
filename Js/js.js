@@ -56,6 +56,7 @@ function clickStart(e) {
 	e.preventDefault();
 	if (Game.mode == 0 && Menu.allReady == true) {
 		Game.mode = 1;
+		Game.music.drop.play();
 	} else if (Game.mode == 1) {
 		Game.startClick.x = e.clientX;
 		Game.startClick.y = e.clientY;

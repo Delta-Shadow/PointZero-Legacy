@@ -62,12 +62,12 @@ GameManager.prototype.restart = function() {
 };
 
 function Music() {
-	this.bg = new Howl({
+	this.bg1 = new Howl({
 		urls: ["Data/Freddy_s_Menagerie.mp3"],
 		autoplay: true,
 		loop: true
 	});
 	this.drop = new Howl({
 		urls: ["Data/Select.wav"],
-	})
+	});
 };

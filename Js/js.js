@@ -138,5 +138,12 @@ function main() {
 	}
 };
 
-candySystem.spawn();
-menu();
+var init = setInterval(function() {
+	Game.ticker++;
+		if (Game.ticker == 2) {
+		clearInterval(init);
+		ticker = 0;
+		candySystem.spawn();
+		menu();
+	}
+}, 5000);

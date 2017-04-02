@@ -96,6 +96,7 @@ function Music() {
 	this.isReady = false;
 	this.bg = new Audio("Data/Freddy_s_Menagerie.mp3");
 	this.bg.oncanplaythrough = function() {
+		document.getElementById("LoadingText").style.display = "None"
 		this.play();
 		this.isReady = true;
 		candySystem.spawn();

@@ -30,7 +30,8 @@ function Candy(x, y) {
 	this.y = y;
 	this.width = 0;
 	this.height = 0;
-	this.color = "#f21b3f";
+	this.counter = 0;
+	this.color = "Green";
 };
 
 Candy.prototype.isCollidingWithBall = function(x, y, width, height) {
@@ -45,6 +46,10 @@ Candy.prototype.update = function() {
 	if (this.width < 25 && this.height < 25) {
 		this.width++;
 		this.height++;
+	} else {
+		this.width = (8 * (Math.cos(this.counter))) / 2 + 22;
+		this.height = (8 * (Math.sin(this.counter))) / 2 + 22;
+		this.counter++;
 	};
 };
 

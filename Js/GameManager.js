@@ -15,6 +15,37 @@ function GameManager() {
 	this.swipe = new Swipe();
 
 	this.music = new Music();
+
+	this.shaker = new Shaker();
+};
+
+function Shaker() {
+	this.x = Math.floor(Math.random() * 50) + 1;
+	this.y = Math.floor(Math.random() * 50) + 1;
+	this.timesRan = 100;
+};
+
+Shaker.prototype.run = function() {
+	if (this.timesRan == 0) {
+		this.preShake();
+		this.timesRan++;
+	} else if (this.timesRan == 1) {
+		this.postShake();
+		this.timesRan++;
+	} else {
+		this.timesRan = 100;
+	}
+};
+
+Shaker.prototype.preShake = function() {
+	ctx.save();
+	var x = Math.floor(Math.random() * 10) + 1;
+	var y = Math.floor(Math.random() * 10) + 1;
+	ctx.translate(x, y);
+};
+
+Shaker.prototype.postShake = function() {
+	ctx.restore();
 };
 
 GameManager.prototype.evaluateDrag = function() {
@@ -62,12 +93,21 @@ GameManager.prototype.restart = function() {
 };
 
 function Music() {
-	this.bg1 = new Howl({
+	this.isReady = false;
+	this.bg = new Audio("Data/Freddy_s_Menagerie.mp3");
+	this.bg.oncanplaythrough = function() {
+		this.play();
+		this.isReady = true;
+		candySystem.spawn();
+		menu();
+	};
+	this.drop = new Audio("Data/Select.wav");
+	/*this.bg1 = new Howl({
 		urls: ["Data/Freddy_s_Menagerie.mp3"],
 		autoplay: true,
 		loop: true
 	});
 	this.drop = new Howl({
 		urls: ["Data/Select.wav"],
-	});
+	});*/
 };

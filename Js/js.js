@@ -22,6 +22,7 @@ var spikes = new Spikes();
 var candySystem = new CandySystem();
 var particleSystem = new ParticleSystem();
 var explosionSystem = new ExplosionSystem();
+var enemySystem = new EnemySystem();
 
 window.addEventListener("resize", OnResizeCalled, false);
 window.addEventListener("orientationchange", OnResizeCalled, false);
@@ -129,21 +130,14 @@ function main() {
 
 	spikes.run();
 	candySystem.run();
+	enemySystem.run();
 	particleSystem.run();
 	explosionSystem.run();
 	ball.run();
+
+	Game.shaker.run();
 
 	if (Game.mode == 2) {
 		gameOverScreen.run();
 	}
 };
-
-var init = setInterval(function() {
-	Game.ticker++;
-		if (Game.ticker == 2) {
-		clearInterval(init);
-		ticker = 0;
-		candySystem.spawn();
-		menu();
-	}
-}, 5000);
